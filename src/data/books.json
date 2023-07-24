@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Der große Gatsby",
+        "pages": 218,
+        "author": "F. Scott Fitzgerald",
+        "publication_date": "10. April 1925",
+        "condition": "Gebraucht",
+        "genre": "Roman",
+        "publisher": "Charles Scribner's Sons"
+    },
+    {
+        "title": "Harry Potter und der Stein der Weisen",
+        "pages": 336,
+        "author": "J.K. Rowling",
+        "publication_date": "26. Juni 1997",
+        "condition": "Neu",
+        "genre": "Fantasy",
+        "publisher": "Bloomsbury Publishing"
+    },
+    {
+        "title": "1984",
+        "pages": 328,
+        "author": "George Orwell",
+        "publication_date": "8. Juni 1949",
+        "condition": "Gebraucht",
+        "genre": "Dystopie",
+        "publisher": "Secker & Warburg"
+    },
+    {
+        "title": "To Kill a Mockingbird",
+        "pages": 281,
+        "author": "Harper Lee",
+        "publication_date": "11. Juli 1960",
+        "condition": "Neu",
+        "genre": "Roman",
+        "publisher": "J. B. Lippincott & Co."
+    },
+    {
+        "title": "Die Verwandlung",
+        "pages": 55,
+        "author": "Franz Kafka",
+        "publication_date": "1915",
+        "condition": "Gebraucht",
+        "genre": "Novelle",
+        "publisher": "Kurt Wolff Verlag"
+    }
+]
