@@ -10,47 +10,79 @@ const routes = [
         name: 'Home',
         component: HomeView,
     },
-    {
-        path: '/article',
-        name: 'Article',
-        component: () => import('../views/ArticleView.vue'),
-    },
-    {
-        path: '/collection',
-        name: 'Collection',
-        component: () => import('../views/ArticlesView.vue')
-    },
+
+
+    // * Article
+            {
+                path: '/create',
+                name: 'CreateArticleView',
+                component: () => import('../views/CreateArticleView.vue'),
+            },
+            {
+                path: '/article',
+                name: 'Article',
+                component: () => import('../views/ArticleView.vue'),
+            },
+            {
+                path: '/collection',
+                name: 'Collection',
+                component: () => import('../views/ArticlesView.vue'),
+            },
+
+
+
     {
         path: '/about',
         name: 'About',
         component: () => import('../views/AboutView.vue'),
     },
-    // {
-    //     path: '/login',
-    //     name: 'Login',
-    //     component: () => import('../views/User/ProfileView.vue')
-    // },
+
+    {
+        path: '/wishlist',
+        name: 'Wishlist',
+        component: () => import('../views/WishlistView.vue'),
+    },
+    {
+        path: '/payment',
+        name: 'Payment',
+        component: () => import('../views/ShoppingCart.vue'),
+    },
+
+
+    {
+        path: '/profil',
+        name: 'Profil',
+        component: () => import('../views/User/ProfileView.vue'),
+    },
+    {
+        path: '/updateProfile',
+        name: 'UpdateProfile',
+        component: () => import('../views/User/ChangeProfileView.vue'),
+    },
+
+    
+    
     {
         path: '/login',
         name: 'Login',
-        component: () => import('../views/User/LoginView.vue')
-    },
-    {
-        path: '/imprint',
-        name: 'Imprint',
-        component: () => import('../views/ImprintView.vue')
+        component: () => import('../views/User/LoginView.vue'),
     },
     {
         path: '/registration',
         name: 'Registration',
-        component: () => import('../views/User/RegistrationView.vue')
+        component: () => import('../views/User/RegistrationView.vue'),
+    },
+    {
+        path: '/imprint',
+        name: 'Imprint',
+        component: () => import('../views/ImprintView.vue'),
     },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes,
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes,
 });
 
 export default router;

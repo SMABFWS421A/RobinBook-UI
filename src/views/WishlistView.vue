@@ -1,35 +1,12 @@
 <template>
     <v-container>
-        <SearchBar></SearchBar>
+        <search-bar></search-bar>
 
-            <h1>Herzlich Willkommen!</h1>
-            <h2 class="mb-3">Starte jetzt deine Reise bei RobinBook und erstelle dein erstes Inserat.</h2>
-            
-            <v-btn
-                class="mb-9"
-                dark
-                medium
-                color="orange"
-                to="/create"
-            >
-                <v-icon dark>mdi-plus</v-icon>
-                Neues Inserat erstellen
-            </v-btn>
-        
-        <v-banner
-            class="rounded-lg"
-            elevation="5"
-            color="primary lighten-2"
-        >
-            
-            <h1 
-                class="mt-2"
-                style="color: white"
-            >
-                Unsere Empfehlungen:</h1>
+        <h1>Hallo Marco!</h1>
+        <h2>Hier ist deine persönliche Wunschliste:</h2>
 
-            <v-row class="mt-2">
-                <v-col v-for="book in books" :key="book.id">
+        <v-row class="mt-2">
+                <v-col v-for="book in books" :key="book.title">
                     <v-card
                         class="mx-auto"
                         max-width="260"
@@ -50,29 +27,29 @@
                         </v-card-subtitle>
 
                         <v-card-actions>
-                        <v-btn
-                            color="orange lighten-2"
-                            text
-                            small
-                            to="/wishlist"
-                        >
-                        <v-icon dark>mdi-plus</v-icon>
-                            Merkliste
-                        </v-btn>
+                            <v-btn
+                                class="mb-2"
+                                dark
+                                small
+                                color="orange"
+                                to="/wishlist"
+                            >
+                                <v-icon dark>mdi-delete-empty</v-icon>
+                                Löschen
+                            </v-btn>
 
-                        <v-btn
-                            color="orange lighten-2"
-                            text
-                            small
-                            to="/payment"
-                        >
-                        <v-icon dark>mdi-cart-arrow-down</v-icon>
-                            Kaufen
-                        </v-btn>
+                            <v-btn
+                                class="mb-2"
+                                dark
+                                small
+                                color="primary"
+                                to="/payment"
+                            >
+                                <v-icon dark>mdi-cart-arrow-down</v-icon>
+                                Kaufen
+                            </v-btn>
 
-                        <v-spacer></v-spacer>
-
-                        <v-btn
+                            <v-btn
                             icon
                             @click="bookIdShown=book.id"
                         >
@@ -90,11 +67,9 @@
                         </div>
                         </v-expand-transition>
                     </v-card>
-                     
+
                 </v-col>
             </v-row>
-        </v-banner>
-
     </v-container>
 </template>
 

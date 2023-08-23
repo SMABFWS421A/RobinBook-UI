@@ -4,9 +4,9 @@
         v-model="searchQuery"
         :append-icon="searchQuery ? 'mdi-close' : ''"
         @click:append="clearSearch"
-        label="Suche"
+        label="Suchbegriff eingeben"
         solo-inverted
-        :placeholder="searchQuery ? '' : 'Suchbegriff eingeben'"
+        :placeholder="searchQuery ? '' : 'z.B. Titel, Autor, Verlag, ISBN'"
         @focus="clearPlaceholder"
       ></v-text-field>
       <v-list v-if="showResults">
@@ -22,10 +22,17 @@
         </v-list-item>
       </v-list>
     </v-container>
-  </template>
+</template>
   
-  <script>
+<script>
   export default {
+    async created(){
+        axios.get('/books', {
+            id
+        }).then(response => {
+            console.log(response);
+        })
+    },
     data() {
       return {
         searchQuery: '',
@@ -35,9 +42,7 @@
     },
     watch: {
       searchQuery(newValue) {
-        if (newValue.length > 0) {
-          // Hier können Sie Ihre eigene Suchlogik implementieren
-          // Hier ist ein Beispiel, wie Sie eine statische Liste von Ergebnissen zurückgeben können
+        if(newValue.length > 0){
           this.searchResults = [
             { id: 1, title: 'Ergebnis 1' },
             { id: 2, title: 'Ergebnis 2' },
@@ -59,11 +64,13 @@
         this.showResults = false;
       },
       clearPlaceholder() {
-        if (!this.searchQuery) {
+        if(!this.searchQuery){
           this.$refs.searchField.blur();
         }
       },
+      search(){
+        
+      },
     },
   };
-  </script>
-  
+</script>
