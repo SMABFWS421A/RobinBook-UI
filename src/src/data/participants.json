@@ -1,0 +1,26 @@
+[
+    {
+        "firstName": "x",
+        "lastName": "x",
+        "mail": "x.x@foo.bar.de",
+        "role": "Frontend-Entwicklung + Design"
+    },
+    {
+        "firstName": "x",
+        "lastName": "x",
+        "mail": "x.x@foo.bar.de",
+        "role": "Backend-Entwicklung"
+    },
+    {
+        "firstName": "x",
+        "lastName": "x",
+        "mail": "x.x@foo.bar.de",
+        "role": "Frontend-Entwicklung"
+    },
+    {
+        "firstName": "x",
+        "lastName": "x",
+        "mail": "x.x@foo.bar.de",
+        "role": "Datenbank"
+    }
+]
