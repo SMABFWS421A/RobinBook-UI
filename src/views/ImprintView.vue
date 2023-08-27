@@ -1,74 +1,45 @@
 <template>
     <v-container>
-      <v-card class="impressum-card">
-        <v-card-title class="headline">Impressum</v-card-title>
-        <p>-----</p>
-        <v-text-field v-model="test"></v-text-field>
-        
-        
-        <h1>{{ test }}</h1>
-        <p>++++++++++</p>
-        <v-card-text>
-          <v-list dense>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">Name:</v-list-item-title>
-                <v-list-item-subtitle>Max Mustermann</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">Adresse:</v-list-item-title>
-                <v-list-item-subtitle>Musterstraße 123, 12345 Musterstadt</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">Telefon:</v-list-item-title>
-                <v-list-item-subtitle>+49 123 456789</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">E-Mail:</v-list-item-title>
-                <v-list-item-subtitle>max.mustermann@example.com</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title class="title">Webseite:</v-list-item-title>
-                <v-list-item-subtitle>www.robinbook.de</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card-text>
-      </v-card>
+        <v-card>
+            <v-card-title>Impressum</v-card-title>
+            <v-list dense>
+                <v-list-item v-for="(item, i) in imprint" :key="i">
+                    <v-list-item-content>
+                        <v-list-item-title class="title">{{ item?.title }}:</v-list-item-title>
+                        <v-list-item-subtitle>{{ item?.value }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-card>
     </v-container>
-  </template>
+</template>
   
-  <script>
+<script>
   export default {
     name: 'Imprint',
     data: () => ({
-        test: "Hallo"
+        imprint: [
+            {
+                title: 'Name',
+                value: 'Max Mustermann',
+            },
+            {
+                title: 'Adresse',
+                value: 'Musterstraße 123, 12345 Musterstadt',
+            },
+            {
+                title: 'Telefon',
+                value: '+49 123 456789',
+            },
+            {
+                title: 'E-Mail',
+                value: 'max.mustermann@example.com',
+            },
+            {
+                title: 'Webseite',
+                value: 'https://robinbook.de',
+            },
+        ],
     }),
   };
   </script>
-  
-  <style scoped>
-  .headline {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .title {
-    font-weight: bold;
-  }
-  
-  .impressum-card {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 24px;
-  }
-  </style>
-  

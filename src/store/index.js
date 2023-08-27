@@ -10,6 +10,10 @@ export default new Vuex.Store({
         projectName: 'RobinBook',
 
 
+        articles: {},
+        article: {},
+
+
         user: {
             firstName: `test`,
             lastName:'test',
@@ -18,7 +22,10 @@ export default new Vuex.Store({
             zipCode:'test',
             state:'test',
             eMail:'test'
-        }
+        },
+
+        wishlist: {},
+        
     },
     getters: {
     },

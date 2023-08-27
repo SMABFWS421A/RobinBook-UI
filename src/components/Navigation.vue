@@ -2,6 +2,8 @@
 <v-navigation-drawer
     v-model="$store.state.isNavigation"
     prominent
+    temporary
+    floating
     disable-resize-watcher
     app
     left>
@@ -15,8 +17,7 @@
                 :href="item?.href"
                 color="blue">
                     <v-list-item-content>
-                        <v-list-item-title>                            
-                            {{ item.title }}</v-list-item-title>
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </v-list-item-content>
             </v-list-item>
         </v-list>
@@ -28,6 +29,7 @@
         name: 'Navigation',
         props: [
             'navigationItems',
+            'logo',
         ],
     }
 </script>

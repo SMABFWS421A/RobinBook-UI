@@ -17,7 +17,7 @@
     export default {
         name: 'Links',
         props: [
-            'headerLinks'
+            'headerLinks',
         ],
     }
 </script>

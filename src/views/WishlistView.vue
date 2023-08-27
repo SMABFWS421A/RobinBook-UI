@@ -1,8 +1,6 @@
 <template>
     <v-container>
-        <search-bar></search-bar>
-
-        <h1>Hallo Marco!</h1>
+        <SearchBar></SearchBar>
         <h2>Hier ist deine persönliche Wunschliste:</h2>
 
         <v-row class="mt-2">
@@ -79,7 +77,7 @@
     export default {
         name: 'HomeView',
         components: {
-            SearchBar
+            SearchBar,
         },
         data: () => ({
             books: [

@@ -1,5 +1,5 @@
 <template>
-    <v-footer app>
+    <v-footer app inset absolute>
         <v-row class="text-center">
             <v-col cols="12">
                 <p>&copy; {{ new Date().getFullYear() }} Projektarbeit <b>RobinBook</b></p>

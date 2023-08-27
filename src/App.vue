@@ -1,8 +1,8 @@
 <template>
     <v-app>
-        <Header :headerLinks="headerLinks"></Header>
-        <Navigation
-            :navigationItems="navigationItems">
+        <Header :headerLinks="headerLinks" :logo="logo"></Header>
+        <Navigation :navigationItems="navigationItems"
+            :logo="logo">
         </Navigation>
         <v-main class="primary" fluid>
             <router-view></router-view>
@@ -38,10 +38,6 @@
                     to: '/wishlist',
                 },
                 {
-                    title: 'Informationen',
-                    to: '/informationen',
-                },
-                {
                     title: 'Profil',
                     to: '/profil',
                     icon: 'mdi-account'
@@ -54,7 +50,7 @@
                     inFooter: false,
                 },
                 {
-                    title: 'Imprint',
+                    title: 'Impressum',
                     to: '/imprint',
                     inFooter: true,
                 },

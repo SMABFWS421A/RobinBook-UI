@@ -19,13 +19,13 @@ const routes = [
                 component: () => import('../views/CreateArticleView.vue'),
             },
             {
-                path: '/article',
-                name: 'Article',
+                path: '/article/:id',
+                name: 'Collection',
                 component: () => import('../views/ArticleView.vue'),
             },
             {
-                path: '/collection',
-                name: 'Collection',
+                path: '/articles',
+                name: 'Articles',
                 component: () => import('../views/ArticlesView.vue'),
             },
 
