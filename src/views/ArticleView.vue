@@ -8,17 +8,17 @@
         </router-link>
 
         <v-card class="mt-10">
-            <v-card-title>{{ book.title }}</v-card-title>
+            <v-card-title>{{ article.Title }}</v-card-title>
             <v-card-text>
-            <p><b>Autor:</b> {{ book.author }}</p>
-            <p><b>ISBN:</b> {{ book.isbn }}</p>
-            <p><b>Veröffentlichungsdatum:</b> {{ book.publication_date }}</p>
-            <p><b>Zustand:</b> {{ book.condition }}</p>
-            <p><b>Genre:</b> {{ book.genre }}</p>
-            <p class="red--text"><b>Preis:</b> {{ book.price }}</p>
-            <p><b>Auflage:</b> {{ book.auflage }}</p>
-            <p><b>Verlag:</b> {{ book.publisher }}</p>
-            <p><b>Zusammenfassung:</b> {{ book.summary }}</p>
+            <p><b>Autor:</b> {{ article.Author }}</p>
+            <p><b>ISBN:</b> {{ article.ISBN }}</p>
+            <p><b>Veröffentlichungsdatum:</b> {{ article.Publication_date }}</p>
+            <p><b>Zustand:</b> {{ article.State }}</p>
+            <p><b>Genre:</b> {{ article.Genre }}</p>
+            <p class="red--text"><b>Preis:</b> {{ article.Price }}</p>
+            <p><b>Auflage:</b> {{ article.Edition }}</p>
+            <p><b>Verlag:</b> {{ article.Publisher }}</p>
+            <p><b>Zusammenfassung:</b> {{ article.Summary }}</p>
             </v-card-text>
             <v-card-actions>
                 <v-btn color="primary" @click="$store.state.wishlist.append(article)">Zur Merkliste hinzufügen</v-btn>
@@ -36,26 +36,39 @@
         mounted(){
             const articleID = this.$route?.params?.id;
 
-            axios.get(`/api/article/${articleID}`)
+            axios.get(`http://localhost:3000/api/article/${articleID}`)
                 .then(response => {
                     if(!response.data) return
-                    const article = response.data?.article;
+                    const article = response.data;
                     this.$store.state.article = article;
+                    console.log(this.$store.state.article)
                 })
                 .catch(err => {
                     console.error(`Das Buch mit der ID "${articleID}" konnte nicht gefunden werden.`);
                 });
         },
+        computed:{
+            article(){
+                return this.$store.state.article;
+            }
+        },
         methods: {
             buyNow(){
-                return;
+                const articleID = this.$route?.params?.id;
+                axios.delete(`http://localhost:3000/api/delete_book/${articleID}`)
+                    .then(response => {
+                        console.log(response.data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error.response.data.error);
+                    });
             }
         },
     };
 </script>
   
 <style scoped>
-    .book-image {
+    .article-image {
         height: 300px;
         object-fit: cover;
     }

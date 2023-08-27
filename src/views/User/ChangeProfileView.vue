@@ -122,13 +122,13 @@ export default {
        
 
         send(data){
-            axios
-                .post("/api/add_user", this.$store.state.user)
-                .then(response => {
-                    alert("Daten erfolgreich gesendet:",response.data);
-                })
-                .catch(error => {alert("Senden der Daten nicht erfolgreich:", error);}); 
-        }
+        //     axios
+        //         .post("/api/add_user", this.$store.state.user)
+        //         .then(response => {
+        //             alert("Daten erfolgreich gesendet:",response.data);
+        //         })
+        //         .catch(error => {alert("Senden der Daten nicht erfolgreich:", error);}); 
+         }
     },
 
     

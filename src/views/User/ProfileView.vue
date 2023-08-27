@@ -21,7 +21,7 @@
                         <p class="row1"><b>Vorname:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.firstName }}</p>
+                        <p class="row1">{{ $store.state.user.Firstname }}</p>
                     </td>
                     
                 </tr>
@@ -30,7 +30,7 @@
                         <p class="row1"><b>Nachname:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.lastName }}</p>
+                        <p class="row1">{{ $store.state.user.Lastname }}</p>
                     </td>
 
                 </tr>
@@ -39,7 +39,7 @@
                         <p class="row1"><b>Straßenname:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.streetname }}</p>
+                        <p class="row1">{{ $store.state.user.Street_name }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +47,7 @@
                         <p class="row1"><b>Hausnummer:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.houseNumber }}</p>
+                        <p class="row1">{{ $store.state.user.House_number }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +55,7 @@
                         <p class="row1"><b>PLZ:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.zipCode }}</p>
+                        <p class="row1">{{ $store.state.user.Zipcode }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@
                         <p class="row1"><b>Stadt:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.state }}</p>
+                        <p class="row1">{{ $store.state.user.State }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -71,7 +71,7 @@
                         <p class="row1"><b>E-Mail:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.eMail }}</p>
+                        <p class="row1">{{ $store.state.user.Mail_address }}</p>
                     </td>
                 </tr>
             </tbody>
@@ -101,7 +101,7 @@ export default {
     }),
 
     created() {
-    axios.get(`/api/get_user_by_id${this.store.state.id}`).then(response => {
+    axios.get(`http://localhost:3000/api/get_user_by_id/${this.$store.state.id}`).then(response => {
       this.$store.state.user = response.data; // Annahme: Die API antwortet mit den Benutzerdaten
     });
   }

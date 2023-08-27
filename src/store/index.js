@@ -8,9 +8,10 @@ export default new Vuex.Store({
         url: 'http://192.168.178.83:8080',
         isNavigation: false,
         projectName: 'RobinBook',
+        id:3,
 
 
-        articles: {},
+        articles: [],
         article: {},
 
 

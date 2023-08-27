@@ -12,7 +12,8 @@
                 <v-text-field v-model="author" :counter="35" :rules="authorRules" label="Autor | Verlag"
                     required></v-text-field>
 
-                <v-text-field v-model="genre" :counter="20" :rules="genreRules" label="Genre" required></v-text-field>
+                <v-select v-model="selectedGenre" :items="genreItems" :rules="genreRules"
+                    label="Genre" required></v-select>
 
                 <v-text-field v-model="datumDerVeröffentlichung" :counter="10" :rules="DateRules"
                     label="Datum der Veröffentlichung" required></v-text-field>
@@ -25,13 +26,13 @@
                 <v-text-field v-model="price" :counter="7" :rules="priceRules" label="Preis [xxx,xx€]"
                     required></v-text-field>
 
-                <v-select v-model="select" :items="items" :rules="[v => !!v || 'Zustand ist ein Pflichfeld']"
+                <v-select v-model="selectedState" :items="stateItems" :rules="[v => !!v || 'Zustand ist ein Pflichfeld']"
                     label="Zustand" required></v-select>
 
                 <v-checkbox v-model="checkbox" :rules="[v => !!v || 'Den Nutzungsbedingungen muss zugestimmt werden!']"
                     label="Nutzungsbedingungen von RobinBook zustimen?" required></v-checkbox>
 
-                <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate, send">
+                <v-btn :disabled="!valid" color="success" class="mr-4" @click="send">
                     Veröffentlichen
                 </v-btn>
 
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data: () => ({
         valid: true,
@@ -91,13 +93,26 @@ export default {
             v => !!v || 'Der Buch Preis ist ein Pflichtfeld',
             v => (v && v.length <= 7) || 'Der Preis ist auf 7 Zeichen limitiert. ( Preis [xxx,xx€] )',
         ],
-        select: null,
-        items: [
-            'Neuware',
-            'Neuwertig',
-            'Leicht gebraucht',
-            'Normal gebraucht',
-            'Stark gebraucht',
+        selectedGenre: null,
+        selectedState: null,
+        stateItems: [
+            'Pristine',
+            'slight signs of wear',
+            'clear signs of use',
+            'Heavily worn'
+        ],
+        genreItems: [
+            'Classic',
+            'Fantasy',
+            'Historical Fiction',
+            'Horror',
+            'Literary Fiction',
+            'Romance',
+            'Science Fiction (Sci-Fi)',
+            'Thriller',
+            'Women`s Fiction',
+            'Biographie/Autobiographie',
+            'Cookbook'
         ],
         checkbox: false,
     }),
@@ -109,15 +124,29 @@ export default {
         reset() {
             this.$refs.form.reset()
         },
-    },
-
-    send(data){
-            axios
-            .post("/api/add_book",this.$store.state.article)
-            .then(response => {alert("Daten erfolgreich gesendet:",response.data);})
-            .catch(error => {alert("Senden der Daten nicht erfolgreich:", error);}); 
+        send(data){
+                axios
+                    .post("http://localhost:3000/api/add_book", {
+                        ISBN: this.isbn,
+                        Title: this.title,
+                        Author: this.author,
+                        Publisher: this.author,
+                        Publication_date: this.datumDerVeröffentlichung,
+                        Edition: this.auflage,
+                        Summary: this.summary,
+                        Genre: this.selectedGenre,
+                        Price: this.price,
+                        State: this.selectedState,
+                        FK_seller: this.$store.state.id,
+                    })
+                    .then(response => {
+                        if(!response.data) return;
+                        console.log("Die Daten wurden erfolgreich versendet und gespeichert.")
+                        alert("Daten erfolgreich gesendet:",response.data);
+                })
+                    .catch(error => {alert("Senden der Daten nicht erfolgreich:", error);}); 
+            }
+    
         }
-
     }
-
 </script>

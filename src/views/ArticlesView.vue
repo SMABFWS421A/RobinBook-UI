@@ -1,23 +1,24 @@
 <template>
     <v-container :class="triggered ? 'red' : 'green'">
         <v-row>
-            <v-col v-for="(book, index) in books" :key="index" cols="4">
-                <v-card>
-                    <v-card-title>
-                        <h2>{{ book?.title }}</h2>
-                    </v-card-title>
-                    <v-card-text>
-                        <p><b>Autor:</b> {{ book?.author }}</p>
-                        <p><b>ISBN:</b> {{ book?.isbn }}</p>
-                        <!-- <p><b>Seitenzahl:</b> {{ book.pages }}</p> -->
-                        <p><b>Veröffentlichungsdatum:</b> {{ book?.publication_date }}</p>
-                        <p><b>Zustand:</b> {{ book?.condition }}</p>
-                        <p><b>Genre:</b> {{ book?.genre }}</p>
-                        <p class="red--text"><b>Preis:</b> {{ book?.price }}</p>
-                        <p><b>Auflage:</b> {{ book?.auflage }}</p>
-                        <p><b>Verlag:</b> {{ book?.publisher }}</p>
-                        <p><b>Zusammenfassung:</b> {{ book?.summary }}</p>
-                    </v-card-text>
+            <v-col v-for="(article, i) in articles" :key="i" cols="4">
+                <v-card class="mt-10">
+                        <v-card-title>{{ article.Title }}</v-card-title>
+                        <v-card-text>
+                        <p><b>Autor:</b> {{ article.Author }}</p>
+                        <p><b>ISBN:</b> {{ article.ISBN }}</p>
+                        <p><b>Veröffentlichungsdatum:</b> {{ (article.Publication_date).substring(0, 10) }}</p>
+                        <p><b>Zustand:</b> {{ article.State }}</p>
+                        <p><b>Genre:</b> {{ article.Genre }}</p>
+                        <p class="red--text"><b>Preis:</b> {{ article.Price }}</p>
+                        <p><b>Auflage:</b> {{ article.Edition }}</p>
+                        <p><b>Verlag:</b> {{ article.Publisher }}</p>
+                        <p><b>Zusammenfassung:</b> {{ article.Summary }}</p>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="primary" @click="$store.state.wishlist.append(article)">Zur Merkliste hinzufügen</v-btn>
+                            <v-btn color="primary" @click="buyNow(article.Book_id)">Details</v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-col>
         </v-row>
@@ -27,36 +28,33 @@
   
 <script>
     import books from '@/data/books.json';
+    import axios from 'axios';
 
     export default {
         name: 'ArticleView',
-        craeted(){
-            axios.get('/data/books')
+        created(){
+            axios.get(`http://localhost:3000/api/get_all_books`)
                 .then(response => {
-                    console.log('response', response);
-                    const articles = response?.books;
-
-                    if(!articles) return;
-
+                    if(!response.data) return;
+                    const articles = response.data;
                     this.$store.state.articles = articles;
-                })
-                .catch(err => {
-                    console.error('Es konnten keine Bücher gefunden werden, bitte versuchen Sie es später erneut.');
-                });
-        },
-        mounted(){
-            axios.get(`/api/get_all_books`)
-                .then(response => {
-                    if(!response.data) return
-                    const article = response.data?.articles;
-                    this.$store.state.article = article;
                 })
                 .catch(err => {
                     console.error("Aktion konnte nicht durchgeführt werden");
                 });
+        },
+        computed: {
+            articles(){
+                return this.$store.state.articles;
+            },
+        },
+        methods: {
+            buyNow(_articleID) {
+                this.$router.push('/article/' + _articleID)
+            },
 
-
-
+        },
+        mounted(){
             const options = {
                 root: null,
                 rootMargin: '0px',
