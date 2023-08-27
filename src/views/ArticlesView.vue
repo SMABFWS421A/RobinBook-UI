@@ -45,6 +45,18 @@
                 });
         },
         mounted(){
+            axios.get(`/api/get_all_books`)
+                .then(response => {
+                    if(!response.data) return
+                    const article = response.data?.articles;
+                    this.$store.state.article = article;
+                })
+                .catch(err => {
+                    console.error("Aktion konnte nicht durchgeführt werden");
+                });
+
+
+
             const options = {
                 root: null,
                 rootMargin: '0px',

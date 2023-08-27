@@ -35,40 +35,22 @@
         name: 'ArticleView',
         mounted(){
             const articleID = this.$route?.params?.id;
-            console.log(articleID);
 
-            // axios.get(`/data/${articleID}`)
-            //     .then(response => {
-            //         if(!response.data) return;
-
-            //         const article = response.data?.article;
-
-            //         this.$store.state.article = article;
-            //     })
-            //     .catch(err => {
-            //         console.error(`Das Buch mit der ID "${articleID}" konnte nicht gefunden werden.`);
-            //     });
+            axios.get(`/api/article/${articleID}`)
+                .then(response => {
+                    if(!response.data) return
+                    const article = response.data?.article;
+                    this.$store.state.article = article;
+                })
+                .catch(err => {
+                    console.error(`Das Buch mit der ID "${articleID}" konnte nicht gefunden werden.`);
+                });
         },
-        data: ()=> ({
-            book: {
-                title: "Beispielbuch",
-                imageUrl: "url-zum-buchcover.jpg",
-                author: "Autor Vorname Nachname",
-                isbn: "1234567890",
-                publication_date: "01. Januar 2023",
-                condition: "Neu",
-                genre: "Fiction",
-                price: "$19.99",
-                auflage: "1. Auflage",
-                publisher: "Verlagsname",
-                summary: "Eine kurze Zusammenfassung des Buchs.",
-            },
-        }),
         methods: {
             buyNow(){
                 return;
             }
-        }
+        },
     };
 </script>
   

@@ -5,7 +5,7 @@
             <thead>
                 <tr>
                     <th class="custom-header">Persönliche Informationen</th>
-                    <th class="custom-header"> <v-btn x-small color="orange" dark>
+                    <th class="custom-header"> <v-btn @click ="saveProfile, send" x-small color="orange" dark>
                             Änderungen speichern
                         </v-btn></th>
 
@@ -29,12 +29,12 @@
                     </td>
                     <td>
                         <p class="row1"><input type="text" id="lastName" v-model="$store.state.user.lastName"></p>
-                    </td>
+                    </td> 
 
                 </tr>
                 <tr>
                     <td>
-                        <p class="row1"><label for="streetName">Straßenname:</label></p>
+                        <p class="row1"><label for="streetname">Straßenname:</label></p>
                     </td>
                     <td>
                         <p class="row1"><input type="text" id="streetname" v-model="$store.state.user.streetname"></p>
@@ -61,7 +61,7 @@
                         <p class="row1"><label for="state">Stadt:</label></p>
                     </td>
                     <td>
-                        <p class="row1"><input type="text" id="state" v-model="profile.state"></p>
+                        <p class="row1"><input type="text" id="state" v-model="$store.state.user.state"></p>
                     </td>
                 </tr>
                 <tr>
@@ -69,7 +69,7 @@
                         <p class="row1"><label for="eMail">E-Mail:</label></p>
                     </td>
                     <td>
-                        <p class="row1"><input type="text" id="eMail" v-model="profile.eMail"></p>
+                        <p class="row1"><input type="text" id="eMail" v-model="$store.state.user.eMail"></p>
                     </td>
                 </tr>
             </tbody>
@@ -86,8 +86,11 @@
  
  
 <script>
+
+import axios from 'axios';
+
 export default {
-    data() {
+   /* data() {
         return {
             profile: {
                 firstName: '',
@@ -99,12 +102,37 @@ export default {
                 eMail: ''
             }
         };
-    },
+    },*/
     methods: {
         saveProfile() {
             //hier Logik für das Speichern der neuen Daten eingeben.
+           
+            const person123 = { firstName:this.$store.state.user.firstName,
+                                lastName:this.$store.state.user.lastName,
+                                streetname:this.$store.state.user.streetname,
+                                houseNumber:this.$store.state.user.houseNumber,
+                                zipCode:this.$store.state.user.zipCode,
+                                state:this.$store.state.user.state,
+                                eMail:this.$store.state.user.eMail}
+           alert("Änderungen wurden gespeichert");
+
+
+        },
+
+       
+
+        send(data){
+            axios
+                .post("/api/add_user", this.$store.state.user)
+                .then(response => {
+                    alert("Daten erfolgreich gesendet:",response.data);
+                })
+                .catch(error => {alert("Senden der Daten nicht erfolgreich:", error);}); 
         }
-    }
+    },
+
+    
+    
 }
 </script>
 <style>.row1 {

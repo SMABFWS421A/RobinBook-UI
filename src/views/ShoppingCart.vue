@@ -18,7 +18,7 @@
                         <v-card-subtitle class="my-0 py-0">{{ book.price }}</v-card-subtitle>
 
                         <v-card-actions>
-                            <v-btn class="mb-2" dark small color="yellow darken-2" to="/payment">
+                            <v-btn class="mb-2" dark small color="yellow darken-2" to="/payment" @click = "axios.delete">
                                 <v-icon dark>mdi-cart-arrow-down</v-icon>
                                 PayPal
                             </v-btn>
@@ -64,5 +64,25 @@
             ],
             show: false,
         }),
+
+        mounted (){
+
+            const axios = require('axios');
+
+            const articleID = this.$route?.params?.id;
+
+            console.log(articleID);
+
+
+                axios.delete(`/api/delete_book/${articleID}`)
+                .then(response => {
+                 console.log(response.data.message);
+                 })
+                 .catch(error => {
+                console.error('Error:', error.response.data.error);
+                 });
+
+        }
+
     }
 </script>

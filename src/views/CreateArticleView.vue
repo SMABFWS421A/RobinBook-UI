@@ -31,7 +31,7 @@
                 <v-checkbox v-model="checkbox" :rules="[v => !!v || 'Den Nutzungsbedingungen muss zugestimmt werden!']"
                     label="Nutzungsbedingungen von RobinBook zustimen?" required></v-checkbox>
 
-                <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
+                <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate, send">
                     Veröffentlichen
                 </v-btn>
 
@@ -110,5 +110,14 @@ export default {
             this.$refs.form.reset()
         },
     },
-}
+
+    send(data){
+            axios
+            .post("/api/add_book",this.$store.state.article)
+            .then(response => {alert("Daten erfolgreich gesendet:",response.data);})
+            .catch(error => {alert("Senden der Daten nicht erfolgreich:", error);}); 
+        }
+
+    }
+
 </script>

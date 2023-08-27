@@ -23,7 +23,7 @@
                     <td>
                         <p class="row1">{{ $store.state.user.firstName }}</p>
                     </td>
-                    <!-- Add more rows as needed -->
+                    
                 </tr>
                 <tr class="mx-auto">
                     <td>
@@ -39,7 +39,7 @@
                         <p class="row1"><b>Straßenname:</b></p>
                     </td>
                     <td>
-                        <p class="row1">{{ $store.state.user.streetName }}</p>
+                        <p class="row1">{{ $store.state.user.streetname }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -76,15 +76,7 @@
                 </tr>
             </tbody>
 
-            <!-- <v-btn
-        class="ma-2 mx-auto primary lighten-2"
-        color = "white"
-        outlined
-        elevation="24"
-        small  
-        to="/updateProfile">
-        <v-icon left> mdi-pencil</v-icon>
-        Profil bearbeiten</v-btn>-->
+            
 
 
 
@@ -97,20 +89,27 @@
  
  
 <script>
+
+import axios from 'axios';
+
+
+
 export default {
     name: 'Profile',
     data: () => ({
-        user: {
-            firstName: `Max`,
-            lastName: `Mustermann`,
-            streetName: `bei Anna Zuhause`,
-            houseNumber: `-1`,
-            zipCode: `12340`,
-            state: `Bergisch Gladbach`,
-            eMail: `name@gmail.com`,
-        }
-    })
-}
+        
+    }),
+
+    created() {
+    axios.get(`/api/get_user_by_id${this.store.state.id}`).then(response => {
+      this.$store.state.user = response.data; // Annahme: Die API antwortet mit den Benutzerdaten
+    });
+  }
+};
+
+
+
+
 </script>
 <style>
 .custom-header {
